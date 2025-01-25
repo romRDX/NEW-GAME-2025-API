@@ -9,4 +9,9 @@ export class UserRepository {
     const user = users.find((u) => u.email === email);
     return user || null;
   }
+
+  static async findById(id: number): Promise<User | null> {
+    const user = users.find((u) => u.id === id);
+    return user || null;
+  }
 }

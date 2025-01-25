@@ -18,4 +18,17 @@ export class AuthService {
 
     return token;
   }
+
+  static async findUserById(id: number): Promise<any> {
+    // Fetch the user by ID using the repository
+    const user = await UserRepository.findById(id);
+
+    if (!user) {
+      throw new Error("User not found.");
+    }
+
+    // Return the user object, excluding sensitive data like the password
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+  }
 }
